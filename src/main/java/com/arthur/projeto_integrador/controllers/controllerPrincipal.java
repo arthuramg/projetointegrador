@@ -1,5 +1,6 @@
 package com.arthur.projeto_integrador.controllers;
 
+import org.springframework.http.ResponseEntity;
 import com.arthur.projeto_integrador.models.Pedidos;
 import com.arthur.projeto_integrador.models.Produto;
 import com.arthur.projeto_integrador.service.ProdutoService;
@@ -23,7 +24,7 @@ public class controllerPrincipal {
         }
 
         @GetMapping("/{id}")
-        public ResponseEntity<Compra> buscarCompra(@PathVariable Long id) {
+        public ResponseEntity<Produto> buscarCompra(@PathVariable Long id) {
             return compraService.buscarPorId(id)
                     .map(ResponseEntity::ok)
                     .orElse(ResponseEntity.notFound().build());

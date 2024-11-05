@@ -1,5 +1,6 @@
 package com.arthur.projeto_integrador.service;
 
+import com.arthur.projeto_integrador.models.Pedidos;
 import com.arthur.projeto_integrador.models.Produto;
 import com.arthur.projeto_integrador.repositorios.ProdutoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,10 @@ public class ProdutoService {
 
     public List<Produto> listarTodos() {
         return produtoRepository.findAll();
+    }
+
+    public Pedidos registrarCompra(Pedidos pedido) {
+        return ProdutoRepository.save(pedido);
     }
 
     public Optional<Produto> buscarPorId(Long id) {
