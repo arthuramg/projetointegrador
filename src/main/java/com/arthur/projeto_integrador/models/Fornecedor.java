@@ -1,16 +1,17 @@
 package com.arthur.projeto_integrador.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "fornecedores")
 public class Fornecedor {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(nullable = false)
     private Long idFornecedor;
     private String razaoSocial;
+    @Column(unique = true)
     private int cnpj;
     private String endereco;
     private int telefone;

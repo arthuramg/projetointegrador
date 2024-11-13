@@ -3,6 +3,7 @@ package com.arthur.projeto_integrador.models;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "clientes")
 public class Cliente {
 
     @Id
@@ -12,6 +13,7 @@ public class Cliente {
 
     private String nome;
     private int idade;
+    @Column(unique = true)
     private String email;
 
     public Cliente(String email, Long id, int idade, String nome) {
