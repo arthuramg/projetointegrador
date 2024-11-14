@@ -1,12 +1,14 @@
 package com.arthur.projeto_integrador.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "pedidos")
 public class Pedidos {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(nullable = false)
     private long idPedido;
     private long idRequisicao;
 
