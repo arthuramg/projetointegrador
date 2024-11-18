@@ -1,13 +1,30 @@
 package com.arthur.projeto_integrador.models;
 
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Table(name = "produtos")
+
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(nullable = false)
+    private String nomeProduto;
+    private Integer quantidade;
+    private Double precoProduto;
+    private String tipoProduto;
+
+    public String getTipoProduto() {
+        return tipoProduto;
+    }
+
+    public void setTipoProduto(String tipoProduto) {
+        this.tipoProduto = tipoProduto;
+    }
 
     public Long getId() {
         return id;
@@ -40,16 +57,4 @@ public class Produto {
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
-
-    public Produto(Long id, String nomeProduto, Double precoProduto, Integer quantidade) {
-        this.id = id;
-        this.nomeProduto = nomeProduto;
-        this.precoProduto = precoProduto;
-        this.quantidade = quantidade;
-    }
-
-    @Column(nullable = false)
-    private String nomeProduto;
-    private Integer quantidade;
-    private Double precoProduto;
 }
