@@ -37,7 +37,7 @@ public class ProdutoService {
 
     public Produto atualizarProduto(Long id, Produto produtoAtualizado) {
         Produto produtoExistente = produtoRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+                .orElseThrow(() -> new RuntimeException("Produto não encontrado")); //caso não encontre o produto, retorna o erro
 
         produtoExistente.setNomeProduto(produtoAtualizado.getNomeProduto());
         produtoExistente.setQuantidade(produtoAtualizado.getQuantidade());

@@ -29,6 +29,11 @@ public class controllerPrincipal {
                     .map(ResponseEntity::ok)
                     .orElse(ResponseEntity.notFound().build());
         }
+
+        @GetMapping("/{produto}")
+        public ResponseEntity<Produto> listarProdutos(){
+            return ;
+        }
     }
 
 }
