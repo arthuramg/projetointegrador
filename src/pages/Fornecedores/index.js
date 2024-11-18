@@ -9,7 +9,7 @@ import IconFornecedores from "../icons/Fornecedores.svg";
 import IconCadastroEmpresas from "../icons/Empresas.png";
 import IconGenerico from "../icons/Generico.png";
 
-function CategoriasDeProdutos() {
+function Fornecedores() {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
@@ -18,7 +18,7 @@ function CategoriasDeProdutos() {
   };
 
   const handleConfirmLogout = () => {
-    setShowModal(false)
+    setShowModal(false);
     navigate("/");
   };
 
@@ -26,39 +26,39 @@ function CategoriasDeProdutos() {
     setShowModal(false);
   };
 
-  const [categorias, setCategorias] = useState([
-    { nome: "Refrigerantes", quantidade: 43 },
-    { nome: "Enlatados", quantidade: 23 },
-    { nome: "Pães", quantidade: 32 },
+  const [fornecedores, setFornecedores] = useState([
+    { nome: "Fornecedor A", contato: "fornecedorA@email.com" },
+    { nome: "Fornecedor B", contato: "(99) 99999-9999" },
+    { nome: "Fornecedor C", contato: "fornecedorC@email.com" },
   ]);
 
-  const [novaCategoria, setNovaCategoria] = useState("");
-  const [descricao, setDescricao] = useState("");
+  const [novoFornecedor, setNovoFornecedor] = useState("");
+  const [contato, setContato] = useState("");
 
   const [modalAberto, setModalAberto] = useState(false);
-  const [categoriaParaExcluir, setCategoriaParaExcluir] = useState(null);
+  const [fornecedorParaExcluir, setFornecedorParaExcluir] = useState(null);
 
-  const handleAdicionarCategoria = () => {
-    if (novaCategoria) {
-      setCategorias([...categorias, { nome: novaCategoria, quantidade: 0 }]);
-      setNovaCategoria("");
-      setDescricao("");
+  const handleAdicionarFornecedor = () => {
+    if (novoFornecedor && contato) {
+      setFornecedores([...fornecedores, { nome: novoFornecedor, contato }]);
+      setNovoFornecedor("");
+      setContato("");
     }
   };
 
   const handleAbrirModal = (index) => {
-    setCategoriaParaExcluir(index);
+    setFornecedorParaExcluir(index);
     setModalAberto(true);
   };
 
   const handleFecharModal = () => {
     setModalAberto(false);
-    setCategoriaParaExcluir(null);
+    setFornecedorParaExcluir(null);
   };
 
   const handleExcluir = () => {
-    const novasCategorias = categorias.filter((_, i) => i !== categoriaParaExcluir);
-    setCategorias(novasCategorias);
+    const novosFornecedores = fornecedores.filter((_, i) => i !== fornecedorParaExcluir);
+    setFornecedores(novosFornecedores);
     setModalAberto(false);
   };
 
@@ -86,13 +86,13 @@ function CategoriasDeProdutos() {
               Saída de Produtos
             </Link>
           </li>
-          <li className="menu-item active">
+          <li className="menu-item">
             <Link to="/categoriasdeprodutos">
               <img src={IconCategorias} alt="Categorias de Produtos" className="icon" />
               Categorias de Produtos
             </Link>
           </li>
-          <li className="menu-item">
+          <li className="menu-item active">
             <Link to="/fornecedores">
               <img src={IconFornecedores} alt="Fornecedores" className="icon" />
               Fornecedores
@@ -111,7 +111,7 @@ function CategoriasDeProdutos() {
       {/* Main */}
       <main className="main">
         <header className="header">
-          <h1>CONTROLE DE ESTOQUE</h1>
+          <h1>CONTROLE DE FORNECEDORES</h1>
           <div className="dropdown">
             PADARIA SANTA
             <img
@@ -125,43 +125,54 @@ function CategoriasDeProdutos() {
         </header>
 
         <section className="form-section">
-          {/* Formulário de Nova Categoria */}
+          {/* Formulário de Novo Fornecedor */}
           <div className="form">
-            <h2>ADICIONAR NOVA CATEGORIA</h2>
+            <h2>ADICIONAR NOVO FORNECEDOR</h2>
             <label>
               <input
                 type="text"
-                value={novaCategoria}
-                onChange={(e) => setNovaCategoria(e.target.value)}
-                placeholder="Nome da Categoria"
+                value={novoFornecedor}
+                onChange={(e) => setNovoFornecedor(e.target.value)}
+                placeholder="Nome do Fornecedor:"
+              />
+            </label>
+            <label>
+              <input
+                type="text"
+                value={contato}
+                onChange={(e) => setContato(e.target.value)}
+                placeholder="Contato: (Número ou Email)"
               />
             </label>
             <div className="form-actions">
-              <button className="cancel-btn" onClick={() => setNovaCategoria("")}>
+              <button className="cancel-btn" onClick={() => {
+                setNovoFornecedor("");
+                setContato("");
+              }}>
                 Cancelar
               </button>
-              <button className="submit-btn" onClick={handleAdicionarCategoria}>
+              <button className="submit-btn" onClick={handleAdicionarFornecedor}>
                 Adicionar
               </button>
             </div>
           </div>
 
-          {/* Lista de Categorias */}
+          {/* Lista de Fornecedores */}
           <div className="table-container">
-            <h2>LISTA DE CATEGORIAS</h2>
+            <h2>LISTA DE FORNECEDORES</h2>
             <table>
               <thead>
                 <tr>
-                  <th>Nome da Categoria</th>
-                  <th>Número de Produtos</th>
+                  <th>Nome do Fornecedor</th>
+                  <th>Contato</th>
                   <th>Ações</th>
                 </tr>
               </thead>
               <tbody>
-                {categorias.map((categoria, index) => (
+                {fornecedores.map((fornecedor, index) => (
                   <tr key={index}>
-                    <td>{categoria.nome}</td>
-                    <td>{categoria.quantidade} Produtos</td>
+                    <td>{fornecedor.nome}</td>
+                    <td>{fornecedor.contato}</td>
                     <td>
                       <button className="delete-btn" onClick={() => handleAbrirModal(index)}>
                         Excluir
@@ -196,8 +207,8 @@ function CategoriasDeProdutos() {
         <div className="modal-overlay">
           <div className="modal">
             <p>
-              Tem certeza que deseja excluir a categoria{" "}
-              <strong>{categorias[categoriaParaExcluir]?.nome}</strong>?
+              Tem certeza que deseja excluir o fornecedor{" "}
+              <strong>{fornecedores[fornecedorParaExcluir]?.nome}</strong>?
             </p>
             <div className="modal-actions">
               <button className="cancel-btn" onClick={handleFecharModal}>
@@ -214,4 +225,4 @@ function CategoriasDeProdutos() {
   );
 }
 
-export default CategoriasDeProdutos;
+export default Fornecedores;

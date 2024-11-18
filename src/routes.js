@@ -7,6 +7,8 @@ import VisaoGeral from './pages/VisaoGeral';
 import EntradaDeProdutos from './pages/EntradaDeProdutos';
 import SaidaDeProdutos from './pages/SaidaDeProdutos';
 import CategoriasDeProdutos from './pages/CategoriasDeProdutos';
+import Fornecedores from './pages/Fornecedores';
+import CadastroEmpresas from './pages/CadastroEmpresas';
 
 function RoutesApp(){
     return(
@@ -19,6 +21,10 @@ function RoutesApp(){
                 <Route path="/entradadeprodutos" element={<EntradaDeProdutos />} />
                 <Route path="/saidadeprodutos" element={<SaidaDeProdutos />} />
                 <Route path="/categoriasdeprodutos" element={<CategoriasDeProdutos />} />
+                <Route path="/fornecedores" element={<Fornecedores />} />
+                <Route path="/cadastroempresas" element={<CadastroEmpresas />} />
+
+
             </Routes>
         </BrowserRouter>
     );

@@ -9,7 +9,7 @@ import IconFornecedores from "../icons/Fornecedores.svg";
 import IconCadastroEmpresas from "../icons/Empresas.png";
 import IconGenerico from "../icons/Generico.png";
 
-function EntradaDeProdutos() {
+function CadastroEmpresas() {
   const [showModal, setShowModal] = useState(false);
   const navigate = useNavigate();
 
@@ -18,12 +18,46 @@ function EntradaDeProdutos() {
   };
 
   const handleConfirmLogout = () => {
-    setShowModal(false)
+    setShowModal(false);
     navigate("/");
   };
 
   const handleCancelLogout = () => {
     setShowModal(false);
+  };
+
+  const [empresas, setEmpresas] = useState([
+    { nome: "Concreteira Apolo", cnpj: "12.144.675/0001-31" },
+  ]);
+  const [novaEmpresa, setNovaEmpresa] = useState("");
+  const [cnpj, setCnpj] = useState("");
+  const [modalAberto, setModalAberto] = useState(false);
+  const [empresaParaExcluir, setEmpresaParaExcluir] = useState(null);
+
+  const handleAdicionarEmpresa = () => {
+    if (novaEmpresa && cnpj) {
+      setEmpresas([...empresas, { nome: novaEmpresa, cnpj }]);
+      setNovaEmpresa("");
+      setCnpj("");
+    } else {
+      alert("Preencha todos os campos!");
+    }
+  };
+
+  const handleAbrirModal = (index) => {
+    setEmpresaParaExcluir(index);
+    setModalAberto(true);
+  };
+
+  const handleFecharModal = () => {
+    setModalAberto(false);
+    setEmpresaParaExcluir(null);
+  };
+
+  const handleExcluir = () => {
+    const novasEmpresas = empresas.filter((_, i) => i !== empresaParaExcluir);
+    setEmpresas(novasEmpresas);
+    setModalAberto(false);
   };
 
   return (
@@ -38,7 +72,7 @@ function EntradaDeProdutos() {
               Visão Geral
             </Link>
           </li>
-          <li className="menu-item active">
+          <li className="menu-item">
             <Link to="/entradadeprodutos">
               <img src={IconEntrada} alt="Entrada de Produtos" className="icon" />
               Entrada de Produtos
@@ -62,7 +96,7 @@ function EntradaDeProdutos() {
               Fornecedores
             </Link>
           </li>
-          <li className="menu-item">
+          <li className="menu-item active">
             <Link to="/cadastroempresas">
               <img src={IconCadastroEmpresas} alt="Cadastro de Empresas" className="icon" />
               Cadastro de Empresas
@@ -75,7 +109,7 @@ function EntradaDeProdutos() {
       {/* Main */}
       <main className="main">
         <header className="header">
-          <h1>CONTROLE DE ESTOQUE</h1>
+          <h1>CADASTRO DE EMPRESAS</h1>
           <div className="dropdown">
             PADARIA SANTA
             <img
@@ -89,33 +123,70 @@ function EntradaDeProdutos() {
         </header>
 
         <section className="form-section">
-          <form className="form">
-            <h2>FORMULÁRIO DE ENTRADA</h2>
+          {/* Formulário de Nova Empresa */}
+          <div className="form">
+            <h2>ADICIONAR NOVA EMPRESA</h2>
             <label>
-              <input type="text" placeholder="Nome do Produto" />
+              <input
+                type="text"
+                value={novaEmpresa}
+                onChange={(e) => setNovaEmpresa(e.target.value)}
+                placeholder="Nome da Empresa"
+              />
             </label>
             <label>
-              <select>
-                <option value="">Selecione a categoria</option>
-              </select>
-            </label>
-            <label>
-              <input type="number" placeholder="Preço Unitário" />
-            </label>
-            <label>
-              <input type="number" placeholder="Quantidade" />
+              <input
+                type="text"
+                value={cnpj}
+                onChange={(e) => setCnpj(e.target.value)}
+                placeholder="CNPJ"
+              />
             </label>
             <div className="form-actions">
-              <button type="button" className="cancel-btn">
+              <button
+                className="cancel-btn"
+                onClick={() => {
+                  setNovaEmpresa("");
+                  setCnpj("");
+                }}
+              >
                 Cancelar
               </button>
-              <button type="submit" className="submit-btn">
-                Gerar Requisição
+              <button className="submit-btn" onClick={handleAdicionarEmpresa}>
+                Adicionar
               </button>
             </div>
-          </form>
+          </div>
+
+          {/* Lista de Empresas */}
+          <div className="table-container">
+            <h2>LISTA DE EMPRESAS</h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Empresa</th>
+                  <th>CNPJ</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody>
+                {empresas.map((empresa, index) => (
+                  <tr key={index}>
+                    <td>{empresa.nome}</td>
+                    <td>{empresa.cnpj}</td>
+                    <td>
+                      <button className="delete-btn" onClick={() => handleAbrirModal(index)}>
+                        Excluir
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </section>
       </main>
+
       {showModal && (
         <div className="modal-overlay">
           <div className="modal">
@@ -131,8 +202,28 @@ function EntradaDeProdutos() {
           </div>
         </div>
       )}
+
+      {/* Modal de Exclusão */}
+      {modalAberto && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <p>
+              Tem certeza que deseja excluir a empresa{" "}
+              <strong>{empresas[empresaParaExcluir]?.nome}</strong>?
+            </p>
+            <div className="modal-actions">
+              <button className="cancel-btn" onClick={handleFecharModal}>
+                Cancelar
+              </button>
+              <button className="submit-btn" onClick={handleExcluir}>
+                Excluir
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
 
-export default EntradaDeProdutos;
+export default CadastroEmpresas;

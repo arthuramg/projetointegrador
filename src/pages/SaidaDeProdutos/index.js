@@ -1,18 +1,35 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "./index.css";
 import IconVisaoGeral from "../icons/VisaoGeral.svg";
 import IconEntrada from "../icons/Entrada.svg";
 import IconSaida from "../icons/Saida.svg";
 import IconCategorias from "../icons/Categorias.svg";
 import IconFornecedores from "../icons/Fornecedores.svg";
-import IconValidade from "../icons/Validade.svg";
+import IconCadastroEmpresas from "../icons/Empresas.png";
+import IconGenerico from "../icons/Generico.png";
 
 function SaidaDeProdutos() {
+  const [showModal, setShowModal] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogoutClick = () => {
+    setShowModal(true);
+  };
+
+  const handleConfirmLogout = () => {
+    setShowModal(false)
+    navigate("/");
+  };
+
+  const handleCancelLogout = () => {
+    setShowModal(false);
+  };
+
   return (
     <div className="app">
       <aside className="sidebar">
-        <h2 className="sidebar-title">E-STOCK</h2>
+        <h3 className="sidebar-title">E-STOCK</h3>
         <ul className="menu">
           <li className="menu-item">
             <Link to="/visaogeral">
@@ -45,9 +62,9 @@ function SaidaDeProdutos() {
             </Link>
           </li>
           <li className="menu-item">
-            <Link to="/alertasdevalidade">
-              <img src={IconValidade} alt="Alertas de Validade" className="icon" />
-              Alertas de Validade
+            <Link to="/cadastroempresas">
+              <img src={IconCadastroEmpresas} alt="Cadastro de Empresas" className="icon" />
+              Cadastro de Empresas
             </Link>
           </li>
         </ul>
@@ -58,29 +75,25 @@ function SaidaDeProdutos() {
           <h1>CONTROLE DE ESTOQUE</h1>
           <div className="dropdown">
             PADARIA SANTA
-            <span className="status-icon"></span>
+            <img
+              src={IconGenerico}
+              alt="Genérico"
+              className="icon"
+              onClick={handleLogoutClick}
+              style={{ cursor: "pointer" }}
+            />
           </div>
         </header>
         <section className="form-section">
           <form className="form">
             <h2>FORMULÁRIO DE SAÍDA</h2>
             <label>
-              Produto:
               <select>
                 <option value="">Selecione o produto</option>
               </select>
             </label>
             <label>
-              Quantidade:
               <input type="number" placeholder="Quantidade" />
-            </label>
-            <label>
-              Destino:
-              <input type="text" placeholder="Destino" />
-            </label>
-            <label>
-              Detalhes: (Opcional)
-              <textarea placeholder="Detalhes adicionais"></textarea>
             </label>
             <div className="form-actions">
               <button type="button" className="cancel-btn">Cancelar</button>
@@ -89,6 +102,21 @@ function SaidaDeProdutos() {
           </form>
         </section>
       </main>
+      {showModal && (
+        <div className="modal-overlay">
+          <div className="modal">
+            <p>Tem certeza que deseja sair?</p>
+            <div className="modal-actions">
+              <button className="cancel-btn" onClick={handleCancelLogout}>
+                Cancelar
+              </button>
+              <button className="submit-btn" onClick={handleConfirmLogout}>
+                Confirmar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
