@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 
 import java.time.LocalDate;
 
+import jakarta.persistence.*;
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "pedidos")
 public class Pedidos {
@@ -41,7 +44,7 @@ public class Pedidos {
         this.fornecedor = fornecedor;
     }
 
-
+    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -89,4 +92,12 @@ public class Pedidos {
     public void setFornecedor(Fornecedor fornecedor) {
         this.fornecedor = fornecedor;
     }
+
+    public Long getIdFornecedor() {
+        if (fornecedor != null) {
+            return fornecedor.getIdFornecedor();
+        }
+        return null;
+    }
 }
+

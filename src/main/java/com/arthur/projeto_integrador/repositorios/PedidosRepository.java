@@ -12,17 +12,17 @@ import java.util.List;
 @Repository
 public interface PedidosRepository extends JpaRepository<Pedidos, Long> {
 
-    //buscar pedidos por status
+
+    // buscar pedidos de um fornecedor específico (usando o id)
+    List<Pedidos> findByFornecedorId(Long fornecedorId);
+
+    // buscar pedidos por status
     @Query("SELECT p FROM Pedidos p WHERE p.status = :status")
     List<Pedidos> findByStatus(@Param("status") StatusPedido status);
 
-    //buscar pedidos criados nos últimos 30 dias
+    // buscar pedidos criados nos últimos 30 dias
     @Query("SELECT p FROM Pedidos p WHERE p.data >= CURRENT_DATE - 30")
     List<Pedidos> findRecentesUltimos30Dias();
-
-    //buscar pedidos de um fornecedor específico (usando o id)
-    @Query("SELECT p FROM Pedidos p WHERE p.fornecedor = :fornecedorId")
-    List<Pedidos> findByFornecedor(@Param("fornecedorId") Long fornecedorId);
 
 }
 
