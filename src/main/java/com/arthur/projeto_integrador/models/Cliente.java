@@ -16,6 +16,9 @@ public class Cliente {
     @Column(unique = true)
     private String email;
 
+    public Cliente() {
+    }
+
     public Cliente(String email, Long id, int idade, String nome) {
         this.email = email;
         this.id = id;

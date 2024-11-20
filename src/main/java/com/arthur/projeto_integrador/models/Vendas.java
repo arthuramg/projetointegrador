@@ -1,7 +1,9 @@
 package com.arthur.projeto_integrador.models;
 
 import jakarta.persistence.*;
-import jdk.jfr.Timestamp;
+import java.time.LocalDateTime;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "vendas")
@@ -25,9 +27,9 @@ public class Vendas {
     private Produto produto;
 
     private float valorTotal;
-    private Timestamp data;
+    private LocalDateTime data;
 
-    public Vendas(String notaFiscal, Cliente cliente, String nome, int qtdItens, Produto produto, float valorTotal, Timestamp data) {
+    public Vendas(String notaFiscal, Cliente cliente, String nome, int qtdItens, Produto produto, float valorTotal, LocalDateTime data) {
         this.notaFiscal = notaFiscal;
         this.cliente = cliente;
         this.nome = nome;
@@ -35,6 +37,10 @@ public class Vendas {
         this.produto = produto;
         this.valorTotal = valorTotal;
         this.data = data;
+    }
+
+    public Vendas() {
+
     }
 
     public Long getId() {
@@ -93,11 +99,11 @@ public class Vendas {
         this.valorTotal = valorTotal;
     }
 
-    public Timestamp getData() {
+    public LocalDateTime getData() {
         return data;
     }
 
-    public void setData(Timestamp data) {
+    public void setData(LocalDateTime data) {
         this.data = data;
     }
 }

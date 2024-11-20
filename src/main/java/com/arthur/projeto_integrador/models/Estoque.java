@@ -13,8 +13,6 @@ public class Estoque {
     @Column(name = "nome_produto", nullable = false)
     private String nomeProduto;
 
-    @ManyToOne
-
     private String marca;
     private float quantidade;
     private float valorUn;
@@ -26,6 +24,10 @@ public class Estoque {
         this.quantidade = quantidade;
         this.valorUn = valorUn;
         this.valorEstoque = valorEstoque;
+    }
+
+    public Estoque() {
+
     }
 
     public Long getId() {

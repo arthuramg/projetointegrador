@@ -24,6 +24,10 @@ public class VendasProduto {
         this.quantidade = quantidade;
     }
 
+    public VendasProduto() {
+
+    }
+
     public Long getIdVenda() {
         return idVenda;
     }

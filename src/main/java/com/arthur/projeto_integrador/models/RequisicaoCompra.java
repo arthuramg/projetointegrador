@@ -30,6 +30,10 @@ public class RequisicaoCompra {
         this.status = status;
     }
 
+    public RequisicaoCompra() {
+
+    }
+
     public Long getId() {
         return id;
     }
