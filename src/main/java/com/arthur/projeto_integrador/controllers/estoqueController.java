@@ -20,7 +20,7 @@ public class estoqueController {
 
     @GetMapping
     public ResponseEntity<List<Produto>> listarEstoque() {
-        List<Produto> produtos = produtoService.listarTodos();
+        List<Produto>produtos = produtoService.listarTodos();
         return ResponseEntity.ok(produtos);
     }
 
