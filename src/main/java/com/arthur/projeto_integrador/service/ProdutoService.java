@@ -41,6 +41,14 @@ public class ProdutoService {
 
         return produtoRepository.save(produtoExistente);
     }
+
+    public void excluirProduto(Long id) {
+        if (produtoRepository.existsById(id)) {
+            produtoRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Produto não encontrado");
+        }
+    }
 /*
     public ResponseEntity<?> atualizarProduto(Produto produto, String acao){
         Map<String, Boolean> validacoes = Map.of( //mapeando os erros para poder identificar na criação
