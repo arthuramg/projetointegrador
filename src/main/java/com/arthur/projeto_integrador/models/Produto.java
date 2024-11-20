@@ -15,6 +15,8 @@ public class Produto {
     @Column(nullable = false)
     private String nomeProduto;
     private Integer quantidade;
+    private int estoqueMin;
+    private int estoqueMax;
     private Double precoProduto;
     private String tipoProduto;
 
@@ -56,5 +58,21 @@ public class Produto {
 
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
+    }
+
+    public int getEstoqueMin() {
+        return estoqueMin;
+    }
+
+    public void setEstoqueMin(int estoqueMin) {
+        this.estoqueMin = estoqueMin;
+    }
+
+    public int getEstoqueMax() {
+        return estoqueMax;
+    }
+
+    public void setEstoqueMax(int estoqueMax) {
+        this.estoqueMax = estoqueMax;
     }
 }

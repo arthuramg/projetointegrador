@@ -14,17 +14,14 @@ public class Estoque {
     private String nomeProduto;
 
     @ManyToOne
-    @JoinColumn(name = "id_categoria", nullable = false)
-    private Categoria categoria;
 
     private String marca;
     private float quantidade;
     private float valorUn;
     private float valorEstoque;
 
-    public Estoque(String nomeProduto, Categoria categoria, String marca, float quantidade, float valorUn, float valorEstoque) {
+    public Estoque(String nomeProduto, String marca, float quantidade, float valorUn, float valorEstoque) {
         this.nomeProduto = nomeProduto;
-        this.categoria = categoria;
         this.marca = marca;
         this.quantidade = quantidade;
         this.valorUn = valorUn;
@@ -45,14 +42,6 @@ public class Estoque {
 
     public void setNomeProduto(String nomeProduto) {
         this.nomeProduto = nomeProduto;
-    }
-
-    public Categoria getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
     }
 
     public String getMarca() {
