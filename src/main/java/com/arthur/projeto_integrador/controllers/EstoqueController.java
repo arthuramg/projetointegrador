@@ -10,11 +10,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
-
 @RestController
 @RequestMapping("/estoque")
-public class estoqueController {
+public class EstoqueController {
 
     private ProdutoService produtoService;
 

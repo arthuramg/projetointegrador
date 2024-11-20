@@ -10,6 +10,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -60,5 +62,10 @@ public class PedidoService {
 
     private boolean validarFornecedor(Long idFornecedor) {
         return fornecedorRepository.existsById(idFornecedor);
+    }
+
+    public List<Pedidos> listarPedidosUltimos30Dias() {
+        LocalDate dataLimite = LocalDate.now().minusDays(30); // Calcula a data de 30 dias atrás
+        return pedidosRepository.findRecentesUltimos30Dias(dataLimite);
     }
 }

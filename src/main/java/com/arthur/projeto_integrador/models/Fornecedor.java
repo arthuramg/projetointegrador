@@ -8,60 +8,76 @@ public class Fornecedor {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(nullable = false)
-    private Long idFornecedor;
+    private Long id; // Renomeado de idFornecedor para id
+
     private String razaoSocial;
+
     @Column(unique = true)
     private String cnpj;
+
     private String endereco;
     private String telefone;
     private String email;
 
-    public Fornecedor(String cnpj, String email, String endereco, Long idFornecedor, String razaoSocial, String telefone) {
+    // Construtor padrão
+    public Fornecedor() {}
+
+    // Construtor com parâmetros
+    public Fornecedor(String cnpj, String email, String endereco, Long id, String razaoSocial, String telefone) {
         this.cnpj = cnpj;
         this.email = email;
         this.endereco = endereco;
+        this.id = id; // Atualizado
         this.razaoSocial = razaoSocial;
         this.telefone = telefone;
     }
 
-    public Fornecedor() {}
-
-
-    public Long getIdFornecedor(){
-        return idFornecedor;
+    // Getters e Setters
+    public Long getId() {
+        return id;
     }
-    public void setIdFornecedor(Long idFornecedor){
-        this.idFornecedor = idFornecedor;
+
+    public void setId(Long id) {
+        this.id = id;
     }
-    public String getRazaoSocial(){
+
+    public String getRazaoSocial() {
         return razaoSocial;
     }
-    public void setRazaoSocial(String razaoSocial){
+
+    public void setRazaoSocial(String razaoSocial) {
         this.razaoSocial = razaoSocial;
     }
-    public String getCnpj(){
+
+    public String getCnpj() {
         return cnpj;
     }
-    public void setCnpj(String cnpj){
+
+    public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
     }
-    public String getEndereco(){
+
+    public String getEndereco() {
         return endereco;
     }
-    public void setEndereco(String endereco){
+
+    public void setEndereco(String endereco) {
         this.endereco = endereco;
     }
-    public String getTelefone(){
+
+    public String getTelefone() {
         return telefone;
     }
-    public void setTelefone(String telefone){
+
+    public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-    public String getEmail(){
+
+    public String getEmail() {
         return email;
     }
-    public void setEmail(String email){
+
+    public void setEmail(String email) {
         this.email = email;
     }
 }

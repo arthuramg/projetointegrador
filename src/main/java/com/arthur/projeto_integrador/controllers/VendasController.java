@@ -1,5 +1,6 @@
 package com.arthur.projeto_integrador.controllers;
 
+import com.arthur.projeto_integrador.dto.VendasDTO;
 import com.arthur.projeto_integrador.models.Vendas;
 import com.arthur.projeto_integrador.service.VendasService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,23 +8,28 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/vendas")
-public class vendasController {
+public class VendasController {
+
     @Autowired
     private VendasService vendasService;
 
     @GetMapping
-    public ResponseEntity<List<Vendas>> listarTodas() {
-        List<Vendas> vendas = vendasService.listarTodas();
+    public ResponseEntity<List<VendasDTO>> listarTodas() {
+        Object VendasDTO;
+        List<VendasDTO> vendas = vendasService.listarTodas().stream()
+                .map(VendasDTO::new) // Mapeia cada venda para o DTO
+                .collect(Collectors.toList());
         return ResponseEntity.ok(vendas);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Vendas> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<VendasDTO> buscarPorId(@PathVariable Long id) {
         return vendasService.buscarPorId(id)
-                .map(ResponseEntity::ok)
+                .map(venda -> ResponseEntity.ok(new VendasDTO(venda))) // Converte para DTO
                 .orElse(ResponseEntity.notFound().build());
     }
 
@@ -53,4 +59,3 @@ public class vendasController {
         }
     }
 }
-

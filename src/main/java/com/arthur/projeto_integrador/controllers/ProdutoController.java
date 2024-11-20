@@ -12,26 +12,32 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/vendas")
-public class produtoController {
+@RequestMapping("/produtos") // Corrigido o caminho
+public class ProdutoController {
+
     @Autowired
     private ProdutoRepository repository;
+
+    @Autowired
     private ProdutoService produtoService;
 
     @GetMapping
     public List<ProdutoDTO> obterProduto() {
-        return null;
+        // Implementação correta para retornar a lista de produtos
+        return repository.findAll().stream()
+                .map(produto -> new ProdutoDTO(produto))
+                .toList();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Produto> buscarPorId(@PathVariable Long id){
+    @GetMapping("/{id}") // Alterado para um caminho mais simples
+    public ResponseEntity<Produto> buscarPorId(@PathVariable Long id) {
         return produtoService.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Produto> cadastrarProduto(@RequestBody Produto produto){
+    public ResponseEntity<Produto> cadastrarProduto(@RequestBody Produto produto) {
         Produto novoProduto = produtoService.cadastrarProduto(produto);
         return ResponseEntity.status(201).body(novoProduto);
     }
@@ -45,5 +51,4 @@ public class produtoController {
             return ResponseEntity.notFound().build();
         }
     }
-
 }

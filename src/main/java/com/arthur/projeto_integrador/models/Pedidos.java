@@ -33,8 +33,7 @@ public class Pedidos {
     private Fornecedor fornecedor;
 
     // Construtores
-    public Pedidos() {
-    }
+    public Pedidos() {}
 
     public Pedidos(int qtdItens, float valorTotal, LocalDate data, StatusPedido status, Fornecedor fornecedor) {
         this.qtdItens = qtdItens;
@@ -93,11 +92,11 @@ public class Pedidos {
         this.fornecedor = fornecedor;
     }
 
+    // Atualizado para usar o novo método getId() de Fornecedor
     public Long getIdFornecedor() {
         if (fornecedor != null) {
-            return fornecedor.getIdFornecedor();
+            return fornecedor.getId();
         }
         return null;
     }
 }
-
