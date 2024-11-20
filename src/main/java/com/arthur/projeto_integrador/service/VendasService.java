@@ -22,7 +22,7 @@ public class VendasService {
         return vendasRepository.findById(id);
     }
 
-    public Vendas salvarVenda(Vendas venda) {
+    public  salvarVenda(Vendas venda) {
         return vendasRepository.save(venda);
     }
 
