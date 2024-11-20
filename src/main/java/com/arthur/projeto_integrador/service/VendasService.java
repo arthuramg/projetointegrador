@@ -1,4 +1,4 @@
-package com.arthur.projeto_integrador.services;
+package com.arthur.projeto_integrador.service;
 
 import com.arthur.projeto_integrador.models.Vendas;
 import com.arthur.projeto_integrador.repositorios.VendasRepository;
