@@ -1,13 +1,58 @@
 package com.arthur.projeto_integrador.controllers;
 
-import org.springframework.stereotype.Controller;
+import com.arthur.projeto_integrador.models.Vendas;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-@Controller
+@RequestMapping("/vendas")
 public class vendasController {
-    @GetMapping("/listarVendas")
+    @Autowired
+    private com.arthur.projeto_integrador.services.VendasService vendasService;
 
+    @GetMapping
+    public ResponseEntity<List<Vendas>> listarTodas() {
+        List<Vendas> vendas = vendasService.listarTodas();
+        return ResponseEntity.ok(vendas);
+    }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Vendas> buscarPorId(@PathVariable Long id) {
+        return vendasService.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    @PostMapping
+    public ResponseEntity<Vendas> salvarVenda(@RequestBody Vendas venda) {
+        Vendas novaVenda = vendasService.salvarVenda(venda);
+        return ResponseEntity.status(201).body(novaVenda);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Vendas> atualizarVenda(@PathVariable Long id, @RequestBody Vendas vendaAtualizada) {
+        try {
+            Vendas venda = vendasService.atualizarVenda(id, vendaAtualizada);
+            return ResponseEntity.ok(venda);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluirVenda(@PathVariable Long id) {
+        try {
+            vendasService.excluirVenda(id);
+            return ResponseEntity.noContent().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+}
 }
