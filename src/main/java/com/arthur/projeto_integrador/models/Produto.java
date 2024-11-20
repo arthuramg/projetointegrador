@@ -48,16 +48,18 @@ public class Produto {
         return precoProduto;
     }
 
-    public void setPrecoProduto(Double precoProduto) {
+    public Double setPrecoProduto(Double precoProduto) {
         this.precoProduto = precoProduto;
+        return precoProduto;
     }
 
     public Integer getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(Integer quantidade) {
+    public Integer setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
+        return quantidade;
     }
 
     public int getEstoqueMin() {

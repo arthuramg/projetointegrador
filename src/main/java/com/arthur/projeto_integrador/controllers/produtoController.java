@@ -12,23 +12,38 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = "*") //permite qualquer rota acessar
+@RequestMapping("/vendas")
 public class produtoController {
     @Autowired
     private ProdutoRepository repository;
-    private ProdutoService ps;
+    private ProdutoService produtoService;
 
-    @GetMapping("/listarProdutos")
+    @GetMapping
     public List<ProdutoDTO> obterProduto() {
         return null;
     }
 
-    private void produto() {
+    @GetMapping("/{id}")
+    public ResponseEntity<Produto> buscarPorId(@PathVariable Long id){
+        return produtoService.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
-    @PostMapping("/cadastrarProduto")
-    public ResponseEntity<?> cadastrarProduto(@RequestBody Produto produto){
-        return ps.cadastrarProduto(produto, "cadastrar");
+    @PostMapping
+    public ResponseEntity<Produto> cadastrarProduto(@RequestBody Produto produto){
+        Produto novoProduto = produtoService.cadastrarProduto(produto);
+        return ResponseEntity.status(201).body(novoProduto);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Produto> atualizarProduto(@PathVariable Long id, @RequestBody Produto produtoAtualizado) {
+        try {
+            Produto produto = produtoService.atualizarProduto(id, produtoAtualizado);
+            return ResponseEntity.ok(produto);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

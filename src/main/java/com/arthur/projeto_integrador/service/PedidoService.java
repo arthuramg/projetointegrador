@@ -1,7 +1,6 @@
 package com.arthur.projeto_integrador.service;
 
 import com.arthur.projeto_integrador.models.Pedidos;
-import com.arthur.projeto_integrador.models.Pedidos;
 import com.arthur.projeto_integrador.models.Produto;
 import com.arthur.projeto_integrador.repositorios.PedidosRepository;
 import org.springframework.beans.factory.annotation.Autowired;

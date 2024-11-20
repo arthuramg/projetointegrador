@@ -1,4 +1,4 @@
-package com.arthur.projeto_integrador.services;
+package com.arthur.projeto_integrador.service;
 
 import com.arthur.projeto_integrador.models.Vendas;
 import com.arthur.projeto_integrador.repositorios.VendasRepository;
@@ -22,7 +22,7 @@ public class VendasService {
         return vendasRepository.findById(id);
     }
 
-    public  salvarVenda(Vendas venda) {
+    public Vendas salvarVenda(Vendas venda) {
         return vendasRepository.save(venda);
     }
 

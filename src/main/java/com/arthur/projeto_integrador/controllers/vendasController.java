@@ -1,12 +1,10 @@
 package com.arthur.projeto_integrador.controllers;
 
 import com.arthur.projeto_integrador.models.Vendas;
+import com.arthur.projeto_integrador.service.VendasService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,7 +12,7 @@ import java.util.List;
 @RequestMapping("/vendas")
 public class vendasController {
     @Autowired
-    private com.arthur.projeto_integrador.services.VendasService vendasService;
+    private VendasService vendasService;
 
     @GetMapping
     public ResponseEntity<List<Vendas>> listarTodas() {
@@ -55,4 +53,4 @@ public class vendasController {
         }
     }
 }
-}
+
