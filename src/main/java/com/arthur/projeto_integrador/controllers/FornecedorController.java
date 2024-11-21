@@ -21,8 +21,8 @@ public class FornecedorController {
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<Fornecedor> buscarPorId(@PathVariable Long idFornecedor){
-        return fornecedorService.buscarPorId(idFornecedor)
+    public ResponseEntity<Fornecedor> buscarPorId(@PathVariable Long id){
+        return fornecedorService.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
@@ -34,9 +34,9 @@ public class FornecedorController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Fornecedor> atualizarFornecedor(@PathVariable Long idFornecedor, @RequestBody Fornecedor fornecedorAtualizado) {
+    public ResponseEntity<Fornecedor> atualizarFornecedor(@PathVariable Long id, @RequestBody Fornecedor fornecedorAtualizado) {
         try {
-            Fornecedor fornecedor = fornecedorService.alterarFornecedor(idFornecedor, fornecedorAtualizado);
+            Fornecedor fornecedor = fornecedorService.alterarFornecedor(id, fornecedorAtualizado);
             return ResponseEntity.ok(fornecedor);
         } catch (RuntimeException e){
             return ResponseEntity.notFound().build();
@@ -44,9 +44,9 @@ public class FornecedorController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluirFornecedor(@PathVariable Long idFornecedor){
+    public ResponseEntity<Void> excluirFornecedor(@PathVariable Long id){
         try{
-            fornecedorService.excluirFornecedor(idFornecedor);
+            fornecedorService.excluirFornecedor(id);
             return ResponseEntity.noContent().build();
         } catch (RuntimeException e){
             return ResponseEntity.notFound().build();
